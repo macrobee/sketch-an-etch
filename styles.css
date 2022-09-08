@@ -5,6 +5,7 @@ body {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: stretch;
+    flex: 1;
 }
 
 .header {
@@ -17,7 +18,9 @@ body {
 .header,
 .interface,
 .canvas,
-.controls {
+.controls,
+.footer,
+.canvas-container {
     padding: 10px;
     border-radius: 10px;
 }
@@ -29,15 +32,40 @@ h1 {
 .interface {
     background-color: #F0F2F5;
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-grow: 1;
+    flex-basis: 400px;
+}
 
+.canvas-container {
+    background-color: #c6c7c9;
+    border-radius: 20px;
+    width: 70%;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    
 }
 
 .canvas {
-    background-color: #c6c7c9;
+    background-color: #fff;
     border-radius: 20px;
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    /* flex-basis: 50%; */
+}
 
+.canvas-row {
+    display: flex;
+}
+
+.canvas-box {
+    background-color: #FFF;
+    border: 1px solid black;
 }
 
 .controls {
@@ -45,4 +73,13 @@ h1 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.footer {
+    background-color: #88b1ea;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #2077F2;
 }

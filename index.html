@@ -14,21 +14,31 @@
         <h1>VS Paint</h1>
     </div>
     <div class="interface">
-        <div class="canvas">
-            <p>Boxes would go here</p>
+        <div class="canvas-container">
+            <!-- <h2>Canvas</h2> -->
+            <div class="canvas">
+                <!-- boxes would go here -->
+            </div>
         </div>
         <div class="controls">
             <input type="color" id="color-picker">
-            <input type="radio" id="rainbow" name="brush-style" value="rainbow">
             <label for="rainbow">Rainbow</label>
-            <input type="radio" id="regular" name="brush-style" value="regular">
+            <input type="radio" id="rainbow" name="brush-style" value="rainbow">
+
             <label for="regular">Regular</label>
-            <input type="radio" id="erase" name="brush-style" value="erase">
+            <input type="radio" id="regular" name="brush-style" value="regular">
+
             <label for="erase">Erase</label>
-            <input type="range" id="dimensions" min="16" max="100" value="20">
+            <input type="radio" id="erase" name="brush-style" value="erase">
+
             <label for="dimensions">Change canvas dimensions</label>
+            <input type="range" id="dimensions" min="16" max="100" value="16">
+
             <button id="clear-canvas">Clear</button>
         </div>
+    </div>
+    <div class="footer">
+        <p>Copyright (c) Viv Studios 2022</p>
     </div>
     <script src="index.js"></script>
 </body>
