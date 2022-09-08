@@ -1,11 +1,28 @@
 const canvas = document.querySelector('.canvas');
+let grid = document.querySelector(`#dimensions`);
 let gridWidth = document.querySelector('#dimensions').value;
-
 let canvasWidth = canvas.offsetWidth - 45;
 let canvasHeight = canvas.offsetHeight - 45;
 // console.log({ canvasWidth, canvasHeight })
+
+grid.addEventListener('change', reDrawGrid);
+function reDrawGrid(e) {
+    console.log(e.target.value);
+    gridWidth = e.target.value;
+    removeOldGrid();
+    
+    let canvasWidth = canvas.offsetWidth - 45;
+    let canvasHeight = canvas.offsetHeight - 45;
+
+    let newBoxSize = pickBoxSize(canvasWidth, canvasHeight, gridWidth);
+    let cellsAcross = Math.floor((canvasWidth) / newBoxSize);
+    
+    drawGrid(cellsAcross, gridWidth, newBoxSize);
+}
+
 let boxSize = pickBoxSize(canvasWidth, canvasHeight, gridWidth);
-let cellsAcross = Math.floor((canvasWidth - 20) / boxSize);
+let cellsAcross = Math.floor((canvasWidth) / boxSize);
+drawGrid(cellsAcross, gridWidth, boxSize);
 
 function pickBoxSize(canvasWidth, canvasHeight, gridWidth) {
     let smallerDimension;
@@ -14,7 +31,10 @@ function pickBoxSize(canvasWidth, canvasHeight, gridWidth) {
 }
 // console.log(`each box is ${boxSize}px wide and ${boxSize}px high`);
 
-drawGrid(cellsAcross, gridWidth, boxSize);
+function removeOldGrid() {
+    let rows = document.querySelectorAll('.canvas-row');
+    rows.forEach(row => row.remove());
+}
 
 function drawGrid(width, height, boxSize) {
     for (let i = 1; i <= height; i++) {
@@ -46,10 +66,10 @@ function brush(e) {
     let currentColor = targetBackground;
     let [r, g, b] = getRGBfromString(currentColor);
     // console.log(`red: ${r}, blue: ${b}, green: ${g}`);
-
-    let newR = darken(r, 50);
-    let newG = darken(g, 50);
-    let newB = darken(b, 50);
+    let darkenBy = 50;
+    let newR = darken(r, darkenBy);
+    let newG = darken(g, darkenBy);
+    let newB = darken(b, darkenBy);
     targetDiv.style.backgroundColor = `rgb(${newR},${newG},${newB})`;
     // console.log(`now it's ${targetDiv.style.backgroundColor}`)
 }
@@ -63,5 +83,10 @@ function getRGBfromString(rgbString) {
 function darken(originalColor, amount) {
     let newColor;
     originalColor >= amount ? newColor = originalColor - amount : newColor = 0;
+    return newColor;
+}
+
+function getRandomColor() {
+    let newColor = Math.random() * 255;
     return newColor;
 }
