@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>VS Paint</h1>
+    </div>
+    <div class="interface">
+        <div class="canvas">
+            <p>Boxes would go here</p>
+        </div>
+        <div class="controls">
+            <input type="color" id="color-picker">
+            <input type="radio" id="rainbow" name="brush-style" value="rainbow">
+            <label for="rainbow">Rainbow</label>
+            <input type="radio" id="regular" name="brush-style" value="regular">
+            <label for="regular">Regular</label>
+            <input type="radio" id="erase" name="brush-style" value="erase">
+            <label for="erase">Erase</label>
+            <input type="range" id="dimensions" min="16" max="100" value="20">
+            <label for="dimensions">Change canvas dimensions</label>
+            <button id="clear-canvas">Clear</button>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
