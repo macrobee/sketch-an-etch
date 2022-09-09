@@ -3,32 +3,28 @@ let grid = document.querySelector(`#dimensions`);
 let gridWidth = document.querySelector('#dimensions').value;
 let canvasWidth = canvas.offsetWidth - 45;
 let canvasHeight = canvas.offsetHeight - 45;
+
 let brushSetting = "soft";
-
 let colorPicker = document.querySelector('#color-picker');
-let colorSetting = [0,0,0];
+let colorSetting = [0, 0, 0];
 colorPicker.addEventListener('input', updateColorSetting);
-// console.log(brushSetting);
-// console.log({ canvasWidth, canvasHeight })
 
-// check which radio button is selected
 let brushbuttons = document.querySelectorAll('input[name="brush-style"]');
 brushbuttons.forEach(button => {
     button.addEventListener('click', updateBrushSetting);
 
 });
-//     if (
-//     button.checked == true) { console.log(button.value) }
-// });
+
 function updateBrushSetting(e) {
     // console.log(e.target.value);
     brushSetting = e.target.value;
 }
 function updateColorSetting(e) {
     colorSetting = hexToRgb(e.target.value);
-    console.log(colorSetting);
+    // console.log(colorSetting);
 }
 
+//draw canvas -----------------------------------------
 let boxSize = pickBoxSize(canvasWidth, canvasHeight, gridWidth);
 let cellsAcross = Math.floor((canvasWidth) / boxSize);
 drawGrid(cellsAcross, gridWidth, boxSize);
@@ -98,7 +94,7 @@ function brush(e) {
     // console.log(`red: ${r}, blue: ${b}, green: ${g}`);
 
     let newColor;
-    if (brushSetting == 'soft') {
+    if (brushSetting == 'darken') {
         let darkenBy = 50;
         newColor = darken(r, g, b, darkenBy);
     } else if (brushSetting == 'rainbow') {
@@ -108,6 +104,9 @@ function brush(e) {
         newColor = erase();
     } else if (brushSetting == 'hard') {
         newColor = useChosenColor();
+    } else if (brushSetting == 'soft') {
+        let newColorWeight = 25;
+        newColor = softBrush(r, g, b, newColorWeight);
     }
 
     targetDiv.style.backgroundColor = `rgb(${newColor[0]},${newColor[1]},${newColor[2]})`;
@@ -138,6 +137,7 @@ function darken(r, g, b, amount) {
     let originalColor = [r, g, b];
     let newColor = [];
     originalColor.forEach(color => {
+
         if (color >= amount) {
             newColor.push(color - amount);
 
@@ -151,6 +151,13 @@ function darken(r, g, b, amount) {
     return newColor;
 }
 
+function softBrush(r, g, b, amount) {
+    let newR = Math.floor((amount * colorSetting[0] + (100 - amount) * r) / 100);
+    let newG = Math.floor((amount * colorSetting[1] + (100 - amount) * g) / 100);
+    let newB = Math.floor((amount * colorSetting[2] + (100 - amount) * b) / 100);
+    let newColor = [newR, newG, newB];
+    return newColor;
+}
 function erase() {
     return [255, 255, 255];
 }
