@@ -24,28 +24,42 @@
             </div>
         </div>
         <div class="controls">
-            <label for="color-picker">Brush color</label>
-            <input type="color" id="color-picker">
+            <div class="brush-settings">
+                <h2>Brush mode:</h2>
+                <div class="brush">
 
-            <label for="soft">Soft</label>
-            <input type="radio" id="soft" name="brush-style" value="soft">
-            
-            <label for="darken">Darken</label>
-            <input type="radio" id="darken" name="brush-style" value="darken" checked="checked">
+                    <div class="mode">
+                        <label for="soft">Soft</label>
+                        <input type="radio" id="soft" name="brush-style" value="soft">
+                    </div>
+                    <div class="mode">
+                        <label for="darken">Darken</label>
+                        <input type="radio" id="darken" name="brush-style" value="darken" checked="checked">
+                    </div>
+                    <div class="mode">
+                        <label for="black">Hard</label>
+                        <input type="radio" id="hard" name="brush-style" value="hard">
+                    </div>
+                    <div class="mode">
+                        <label for="rainbow">Rainbow</label>
+                        <input type="radio" id="rainbow" name="brush-style" value="rainbow">
+                    </div>
+                    <div class="mode">
+                        <label for="erase">Erase</label>
+                        <input type="radio" id="erase" name="brush-style" value="erase">
+                    </div>
+                </div>
+            </div>
+            <div class="color">
+                <label for="color-picker">Brush color</label>
+                <input type="color" id="color-picker">
+            </div>
+            <div class="resolution">
+                <label for="dimensions">Canvas resolution</label>
+                <input type="range" id="dimensions" min="10" max="40" value="10">
 
-            <label for="black">Hard</label>
-            <input type="radio" id="hard" name="brush-style" value="hard">
-
-            <label for="rainbow">Rainbow</label>
-            <input type="radio" id="rainbow" name="brush-style" value="rainbow">
-
-            <label for="erase">Erase</label>
-            <input type="radio" id="erase" name="brush-style" value="erase">
-
-            <label for="dimensions">Canvas resolution</label>
-            <input type="range" id="dimensions" min="10" max="40" value="10">
-
-            <button id="clear-canvas">Clear</button>
+                <button id="clear-canvas">Clear</button>
+            </div>
         </div>
     </div>
     <div class="footer">

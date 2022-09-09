@@ -1,8 +1,8 @@
 const canvas = document.querySelector('.canvas');
 let grid = document.querySelector(`#dimensions`);
 let gridWidth = document.querySelector('#dimensions').value;
-let canvasWidth = canvas.offsetWidth - 45;
-let canvasHeight = canvas.offsetHeight - 45;
+let canvasWidth = Math.floor(canvas.offsetWidth*0.9);
+let canvasHeight = Math.floor(canvas.offsetHeight*0.9);
 
 let brushSetting = "soft";
 let colorPicker = document.querySelector('#color-picker');

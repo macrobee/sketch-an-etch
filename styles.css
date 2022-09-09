@@ -13,7 +13,7 @@ body {
 .header {
     background-color: #2077F2;
     background-image: linear-gradient(#2077F2, #88b1ea);
-    /* box-shadow: 3px 3px 4px 1px #969798; */
+    box-shadow: 3px 3px 4px 1px #969798;
     border: 3px solid #2077F2;
     display: flex;
     justify-content: center;
@@ -79,11 +79,31 @@ h1 {
 .controls {
     background-color: #c6c7c9;
     border: 3px solid #a5a5a7;
-    font-weight: 300;
+    font-weight: 500;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 25%;
+}
+
+.mode {
+    display: flex;
+    width: 30%;
+    justify-content: space-between;
+}
+
+button {
+    background-color: #2077F2;
+    color: #fff;
+    padding: 5px 10px;
+    border: 3px solid #fff;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+input {
+    padding: 5px;
+    border-radius: 10px;
 }
 
 .footer {
@@ -96,15 +116,89 @@ h1 {
     border: 3px solid #2077F2;
 }
 
-button {
-    background-color: #2077F2;
-    color: #fff;
-    padding: 5px 10px;
-    border: 3px solid #fff;
-    border-radius: 10px;
-}
+@media screen and (max-width: 500px) {
+    body {
+        margin: 0;
+        height: 100%;
+    }
 
-input {
-    padding: 5px;
-    border-radius: 10px;
+    .header {
+        border-radius: 0;
+        padding: 5px;
+        border: none;
+        border-bottom: solid 3px #2077F2;
+        box-shadow: none;
+    }
+
+    h1,
+    p {
+        margin: 0;
+    }
+
+    .controls {
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    h2 {
+        margin: 0;
+        font-size: 1em;
+    }
+
+    .brush {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .mode {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .color {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .resolution {
+        display: flex;
+        gap: 10%;
+        /* flex-direction: column; */
+    }
+
+    .interface {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .canvas-container,
+    .controls {
+        width: 90%;
+    }
+
+    .canvas-container {
+        flex-grow: 2;
+        height: 400px;
+    }
+
+    .controls {
+        flex-grow: 1;
+        padding: 5%;
+        border-radius: 0;
+    }
+
+    button {
+        width: 100px;
+        /* align-self: flex-end; */
+    }
+
+    .footer {
+        border-radius: 0;
+        padding: 5px;
+        border: none;
+        border-top: solid 3px #2077F2;
+    }
 }
