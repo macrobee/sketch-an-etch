@@ -3,7 +3,31 @@ let grid = document.querySelector(`#dimensions`);
 let gridWidth = document.querySelector('#dimensions').value;
 let canvasWidth = canvas.offsetWidth - 45;
 let canvasHeight = canvas.offsetHeight - 45;
+let brushSetting = "soft";
+
+let colorPicker = document.querySelector('#color-picker');
+let colorSetting = [0,0,0];
+colorPicker.addEventListener('input', updateColorSetting);
+// console.log(brushSetting);
 // console.log({ canvasWidth, canvasHeight })
+
+// check which radio button is selected
+let brushbuttons = document.querySelectorAll('input[name="brush-style"]');
+brushbuttons.forEach(button => {
+    button.addEventListener('click', updateBrushSetting);
+
+});
+//     if (
+//     button.checked == true) { console.log(button.value) }
+// });
+function updateBrushSetting(e) {
+    // console.log(e.target.value);
+    brushSetting = e.target.value;
+}
+function updateColorSetting(e) {
+    colorSetting = hexToRgb(e.target.value);
+    console.log(colorSetting);
+}
 
 let boxSize = pickBoxSize(canvasWidth, canvasHeight, gridWidth);
 let cellsAcross = Math.floor((canvasWidth) / boxSize);
@@ -66,19 +90,27 @@ function brush(e) {
     let targetBackground = targetDiv.style.backgroundColor;
 
     if (!targetBackground) {
-        targetDiv.style.backgroundColor = targetBackground = `rgb(255,255,255)`
-    } else if (targetBackground == 'rgb(0, 0, 0)') {
-        return
+        targetDiv.style.backgroundColor = targetBackground = `rgb(255, 255, 255)`
     }
 
     let currentColor = targetBackground;
     let [r, g, b] = getRGBfromString(currentColor);
     // console.log(`red: ${r}, blue: ${b}, green: ${g}`);
-    let darkenBy = 50;
-    let newR = darken(r, darkenBy);
-    let newG = darken(g, darkenBy);
-    let newB = darken(b, darkenBy);
-    targetDiv.style.backgroundColor = `rgb(${newR},${newG},${newB})`;
+
+    let newColor;
+    if (brushSetting == 'soft') {
+        let darkenBy = 50;
+        newColor = darken(r, g, b, darkenBy);
+    } else if (brushSetting == 'rainbow') {
+        newColor = getRandomColor();
+
+    } else if (brushSetting == 'erase') {
+        newColor = erase();
+    } else if (brushSetting == 'hard') {
+        newColor = useChosenColor();
+    }
+
+    targetDiv.style.backgroundColor = `rgb(${newColor[0]},${newColor[1]},${newColor[2]})`;
     // console.log(`now it's ${targetDiv.style.backgroundColor}`)
 }
 
@@ -88,20 +120,48 @@ function getRGBfromString(rgbString) {
     return rgbArray;
 }
 
-function darken(originalColor, amount) {
-    let newColor;
-    originalColor >= amount ? newColor = originalColor - amount : newColor = 0;
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? [
+        parseInt(result[1], 16),
+        parseInt(result[2], 16),
+        parseInt(result[3], 16)
+    ] : null;
+    // return result ? {
+    //     r: parseInt(result[1], 16),
+    //     g: parseInt(result[2], 16),
+    //     b: parseInt(result[3], 16)
+    // } : null;
+}
+
+function darken(r, g, b, amount) {
+    let originalColor = [r, g, b];
+    let newColor = [];
+    originalColor.forEach(color => {
+        if (color >= amount) {
+            newColor.push(color - amount);
+
+        } else {
+            newColor.push(0);
+        }
+    })
+    // console.log(`new color is: ${newColor}`);
+
+    // originalColor >= amount ? newColor = originalColor - amount : newColor = 0;
     return newColor;
 }
 
 function erase() {
-    return 0;
+    return [255, 255, 255];
 }
 function getRandomColor() {
-    let newColor = Math.random() * 255;
+    let newColor = [Math.random() * 255, Math.random() * 255, Math.random() * 255];
     return newColor;
 }
-
+function useChosenColor() {
+    let chosenColor = colorSetting;
+    return chosenColor;
+}
 // clear canvas *******************************
 
 const clearButton = document.querySelector('#clear-canvas');

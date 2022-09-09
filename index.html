@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Etch-a-Sketch</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -21,17 +24,22 @@
             </div>
         </div>
         <div class="controls">
+            <label for="color-picker">Brush color</label>
             <input type="color" id="color-picker">
-            <label for="rainbow">Rainbow</label>
-            <input type="radio" id="rainbow" name="brush-style" value="rainbow" >
 
-            <label for="regular">Regular</label>
-            <input type="radio" id="regular" name="brush-style" value="regular" checked="checked">
+            <label for="soft">Soft</label>
+            <input type="radio" id="soft" name="brush-style" value="soft" checked="checked">
+
+            <label for="black">Hard</label>
+            <input type="radio" id="hard" name="brush-style" value="hard">
+
+            <label for="rainbow">Rainbow</label>
+            <input type="radio" id="rainbow" name="brush-style" value="rainbow">
 
             <label for="erase">Erase</label>
-            <input type="radio" id="erase" name="brush-style" value="erase" >
+            <input type="radio" id="erase" name="brush-style" value="erase">
 
-            <label for="dimensions">Change canvas dimensions</label>
+            <label for="dimensions">Canvas resolution</label>
             <input type="range" id="dimensions" min="10" max="40" value="10">
 
             <button id="clear-canvas">Clear</button>
