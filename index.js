@@ -5,24 +5,31 @@ let canvasWidth = canvas.offsetWidth - 45;
 let canvasHeight = canvas.offsetHeight - 45;
 // console.log({ canvasWidth, canvasHeight })
 
+let boxSize = pickBoxSize(canvasWidth, canvasHeight, gridWidth);
+let cellsAcross = Math.floor((canvasWidth) / boxSize);
+drawGrid(cellsAcross, gridWidth, boxSize);
+
+// creating grid functions *****************************
 grid.addEventListener('change', reDrawGrid);
+
 function reDrawGrid(e) {
-    console.log(e.target.value);
-    gridWidth = e.target.value;
+    if (!e.target.value) {
+        gridWidth = gridWidth;
+    } else {
+        gridWidth = e.target.value;
+    }
+    // console.log(e.target.value);
+
     removeOldGrid();
-    
+
     let canvasWidth = canvas.offsetWidth - 45;
     let canvasHeight = canvas.offsetHeight - 45;
 
     let newBoxSize = pickBoxSize(canvasWidth, canvasHeight, gridWidth);
     let cellsAcross = Math.floor((canvasWidth) / newBoxSize);
-    
+
     drawGrid(cellsAcross, gridWidth, newBoxSize);
 }
-
-let boxSize = pickBoxSize(canvasWidth, canvasHeight, gridWidth);
-let cellsAcross = Math.floor((canvasWidth) / boxSize);
-drawGrid(cellsAcross, gridWidth, boxSize);
 
 function pickBoxSize(canvasWidth, canvasHeight, gridWidth) {
     let smallerDimension;
@@ -53,6 +60,7 @@ function drawGrid(width, height, boxSize) {
     boxes.forEach(box => box.addEventListener('mouseover', brush));
 }
 
+// drawing functions ******************************
 function brush(e) {
     let targetDiv = e.target;
     let targetBackground = targetDiv.style.backgroundColor;
@@ -86,7 +94,15 @@ function darken(originalColor, amount) {
     return newColor;
 }
 
+function erase() {
+    return 0;
+}
 function getRandomColor() {
     let newColor = Math.random() * 255;
     return newColor;
 }
+
+// clear canvas *******************************
+
+const clearButton = document.querySelector('#clear-canvas');
+clearButton.addEventListener('click', reDrawGrid);
